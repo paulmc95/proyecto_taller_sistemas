@@ -10,6 +10,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app)
 ma=Marshmallow(app)
 
+import conexion
+
 #una clase tareas, y con un parametro del modelo que viene de la base de datos, se define que se va a 
 # guardar en la base de datos
 class Modalidad_entrega(db.Model):
