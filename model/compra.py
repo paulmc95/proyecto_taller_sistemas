@@ -1,7 +1,4 @@
 from conexion import *
-
-#una clase tareas, y con un parametro del modelo que viene de la base de datos, se define que se va a 
-# guardar en la base de datos
 class Compra(db.Model):
     id_compra=db.Column(db.Integer,primary_key=True)
     id_cliente=db.Column(db.Integer)
@@ -24,13 +21,10 @@ class Compra(db.Model):
         self.descuento=descuento
         self.id_estado=id_estado
 
-#lee toda la clase y apartir de eso crea tablas
 db.create_all()
 
-#creamos una clase esquema, y importamos desde ma y desde ma importamos esquema
 class Compra_Schema(ma.Schema):
     class Meta:
-        #definimos los campos que quiero obtener cada ves que interactue con este esquema
         fields=('id_compra','id_cliente','id_vendedor','fecha','id_Estado_compra','id_Estado_pago','Modalidad_entrega','descuento','id_estado')
 
 compra_schema=Compra_Schema()
@@ -48,7 +42,6 @@ def create_compra():
     Modalidad_entrega=request.json['Modalidad_entrega']
     descuento=request.json['descuento']
     id_estado=request.json['id_estado']
-    #creo un esquema con las variables y lo guardo en una variable new_task
     new_compra=Compra(id_compra,id_cliente,id_vendedor,fecha,id_Estado_compra,id_Estado_pago,Modalidad_entrega,descuento,id_estado)
     db.session.add(new_compra)
     db.session.commit()
@@ -77,7 +70,6 @@ def update_compra(id_compra):
     Modalidad_entrega=request.json['Modalidad_entrega']
     descuento=request.json['descuento']
     id_estado=request.json['id_estado']
-    #actualizamos con las variables que recibieron los datos
     compra.id_cliente=id_cliente
     compra.id_vendedor=id_vendedor
     compra.fecha=fecha
@@ -99,7 +91,6 @@ def delete_compra(id_compra):
 
 #creamos una ruta principal a traves del method GET
 @app.route('/',methods=['GET'])
-#se crea una funcion que envie un mensaje de bienvenida
 def index():
     return jsonify({'message':'Welcome to my API'})
 

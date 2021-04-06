@@ -15,13 +15,10 @@ class Detalle_compra(db.Model):
         self.precio=precio
         self.descuento=descuento
 
-#lee toda la clase y apartir de eso crea tablas
 db.create_all()
 
-#creamos una clase esquema, y importamos desde ma y desde ma importamos esquema
 class Detalle_compra_Schema(ma.Schema):
     class Meta:
-        #definimos los campos que quiero obtener cada ves que interactue con este esquema
         fields=('id_detalle_compra','compra','producto','cantidad','precio','descuento')
 
 detalle_compra_schema=Detalle_compra_Schema()
@@ -36,7 +33,6 @@ def create_detalle_compra():
     cantidad=request.json['cantidad']
     precio=request.json['precio']
     descuento=request.json['descuento']
-    #creo un esquema con las variables y lo guardo en una variable new_task
     new_detalle_compra=Detalle_compra(id_detalle_compra,compra,producto,cantidad,precio,descuento)
     db.session.add(new_detalle_compra)
     db.session.commit()
@@ -62,7 +58,6 @@ def update_detalle_compra(id_detalle_compra):
     cantidad=request.json['cantidad']
     precio=request.json['precio']
     descuento=request.json['descuento']
-    #actualizamos con las variables que recibieron los datos
     detalle_compra.compra=compra
     detalle_compra.producto=producto
     detalle_compra.cantidad=cantidad
@@ -81,6 +76,5 @@ def delete_compra(id_detalle_compra):
 
 #creamos una ruta principal a traves del method GET
 @app.route('/',methods=['GET'])
-#se crea una funcion que envie un mensaje de bienvenida
 def index():
     return jsonify({'message':'Welcome to my API'})
