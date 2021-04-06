@@ -1,16 +1,4 @@
-from flask import Flask, request,jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-
-#instancia de flask, donde se le va a pasar el name
-app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root@localhost/dbmystore'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-
-db=SQLAlchemy(app)
-ma=Marshmallow(app)
-
-import conexion
+from conexion import *
 
 #una clase tareas, y con un parametro del modelo que viene de la base de datos, se define que se va a 
 # guardar en la base de datos
@@ -93,3 +81,4 @@ def index():
 #iniciar app en un puerto que mostrara por consola
 if __name__=="__main__":
     app.run(debug=True)
+
